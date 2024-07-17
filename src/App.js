@@ -15,7 +15,7 @@ const ArticleList = ({ articles }) => (
   </div>
 );
 
-const TopicNode = ({ name, volume, impression, keywords, average_position, children, nonSeedKeywords, articles, level = 0 }) => {
+const TopicNode = ({ name, volume, impression, keywords, average_position, children, nonSeedKeywords, articles, blurb, level = 0 }) => {
   const [isExpanded, setIsExpanded] = useState(level < 1);
   const [showKeywords, setShowKeywords] = useState(false);
   const [showArticles, setShowArticles] = useState(false);
@@ -33,7 +33,7 @@ const TopicNode = ({ name, volume, impression, keywords, average_position, child
   const totalVolume = children && volume !== undefined ? children.reduce((sum, child) => sum + (child.volume || 0), 0) : volume;
   const totalKeywords = children && keywords !== undefined ? children.reduce((sum, child) => sum + (child.keywords || 0), 0) : keywords;
 
-  const sortedChildren = children ? [...children].sort((a, b) => b.volume - a.volume) : null;
+  const sortedChildren = children ? [...children].sort((a, b) => a.name.localeCompare(b.name)) : null;
 
   return (
     <div className={`mb-2 ${level === 0 ? 'bg-blue-50 p-4 rounded-lg' : ''}`}>
@@ -44,14 +44,19 @@ const TopicNode = ({ name, volume, impression, keywords, average_position, child
       >
         {children && (isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
         <span className={`font-bold mr-2 ${level === 0 ? 'text-xl' : ''} ${level === 1 ? 'text-lg' : ''}`}>{name}</span>
-        {totalVolume !== undefined && (
+        {name === "Career" && (
+          <span className="text-sm text-gray-600">
+            (avg monthly impression: {impression.toLocaleString()}, Keywords: {keywords.toLocaleString()}, Avg. Position: {average_position})
+          </span>
+        )}
+        {name !== "Career" && totalVolume !== undefined && (
           <span className="text-sm text-gray-600">
             (Volume: {totalVolume.toLocaleString()}, Keywords: {totalKeywords.toLocaleString()})
           </span>
         )}
-        {impression !== undefined && average_position !== undefined && (
+        {impression !== undefined && name !== "Career" && (
           <span className="text-sm text-gray-600">
-            (Average Monthly Impression: {impression.toLocaleString()}, Avg. Position: {average_position})
+            (avg monthly impression: {impression.toLocaleString()})
           </span>
         )}
         {nonSeedKeywords && (
@@ -74,6 +79,11 @@ const TopicNode = ({ name, volume, impression, keywords, average_position, child
       {showKeywords && nonSeedKeywords && (
         <div className="ml-8 mt-2 p-2 bg-gray-100 rounded text-sm">
           <strong>Non-seed keywords:</strong> {nonSeedKeywords.join(', ')}
+        </div>
+      )}
+      {showArticles && blurb && (
+        <div className="ml-8 mt-2 p-2 bg-gray-100 rounded text-sm">
+          {blurb}
         </div>
       )}
       {showArticles && articles && <ArticleList articles={articles} />}
@@ -100,7 +110,8 @@ const LinkedInPulseTopicsHierarchy = () => {
         average_position: 11.25,
         children: [
           {
-            name: "Objectives",
+            name: "Career Objectives",
+            blurb: "Articles that provide guidance on setting career objectives, including examples and tips on how to craft effective career goals for resumes and CVs.",
             articles: [
               "How to write a career objective for your resume",
               "Examples of effective career objectives",
@@ -109,7 +120,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Exploration",
+            name: "Career Exploration",
+            blurb: "Articles that help individuals explore different career paths, understand various industries, and identify potential career opportunities.",
             articles: [
               "Guides on exploring new career paths",
               "Industry overviews and career prospects",
@@ -118,7 +130,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Development",
+            name: "Career Development",
+            blurb: "Articles that focus on professional growth, skill development, and strategies for advancing one's career.",
             articles: [
               "Strategies for career advancement",
               "Importance of continuous learning and development",
@@ -127,7 +140,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Transition",
+            name: "Career Transition",
+            blurb: "Articles that offer advice on changing careers, including how to make a smooth transition and navigate challenges during career shifts.",
             articles: [
               "Steps to successfully change careers",
               "Overcoming challenges in career transitions",
@@ -136,7 +150,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Opportunities",
+            name: "Career Opportunities",
+            blurb: "Articles that highlight job openings, industry trends, and opportunities for career advancement within various fields.",
             articles: [
               "Lists of top job opportunities in different industries",
               "Emerging career opportunities and trends",
@@ -145,7 +160,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Coaching",
+            name: "Career Coaching",
+            blurb: "Articles that discuss the benefits of career coaching, how to choose a coach, and insights from professional career coaches.",
             articles: [
               "Benefits of working with a career coach",
               "How to select the right career coach",
@@ -154,7 +170,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Advice",
+            name: "Career Advice",
+            blurb: "Articles offering general career advice, tips for job seekers, and guidance on various aspects of professional life.",
             articles: [
               "Job search tips and strategies",
               "Career advice for recent graduates",
@@ -163,7 +180,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Planning",
+            name: "Career Planning",
+            blurb: "Articles that help individuals create and implement effective career plans, set long-term goals, and develop strategies for achieving them.",
             articles: [
               "Creating a comprehensive career plan",
               "Setting short-term and long-term career goals",
@@ -172,7 +190,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Change",
+            name: "Career Change",
+            blurb: "Articles that provide insights and advice specifically for those looking to make a significant change in their career path.",
             articles: [
               "Planning a successful career change",
               "Identifying reasons for a career change",
@@ -181,7 +200,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Training",
+            name: "Career Training",
+            blurb: "Articles that focus on training programs, courses, and certifications that can help individuals enhance their skills and advance their careers.",
             articles: [
               "Top training programs for career advancement",
               "Benefits of professional certifications",
@@ -190,7 +210,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Success",
+            name: "Career Success",
+            blurb: "Articles that highlight strategies for achieving career success, including personal development, goal setting, and success stories.",
             articles: [
               "Habits of successful professionals",
               "Setting and achieving career milestones",
@@ -199,7 +220,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Networking",
+            name: "Career Networking",
+            blurb: "Articles that emphasize the importance of networking in career development and offer tips on building and maintaining professional connections.",
             articles: [
               "Effective networking strategies",
               "Building a professional network",
@@ -208,7 +230,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Counseling",
+            name: "Career Counseling",
+            blurb: "Articles that provide information about career counseling services, their benefits, and how to find and work with a career counselor.",
             articles: [
               "What to expect from career counseling",
               "Finding the right career counselor",
@@ -398,6 +421,12 @@ const LinkedInPulseTopicsHierarchy = () => {
     ]
   };
 
+    // Sort the parent nodes by volume or impression
+    const sortParentNodes = (nodes) => {
+      return nodes.sort((a, b) => (b.volume || b.impression || 0) - (a.volume || a.impression || 0));
+    };
+
+    
   // Sort the children of the "Career" node alphabetically by name
   const sortChildrenAlphabetically = (node) => {
     if (node.children) {
