@@ -86,35 +86,95 @@ const LinkedInPulseTopicsHierarchy = () => {
     name: "LinkedIn Pulse Core Topics",
     children: [
       {
-        name: "Career Development",
-        volume: 2772740,
-        keywords: 51149,
-        children: [
+        "name": "Career",
+        "impression": 63482767,
+        "keywords": 40954,
+        "average_position": 11.25,
+        "children": [
           {
-            name: "Job Search Strategies",
-            volume: 1230690,
-            keywords: 5892,
-            nonSeedKeywords: ["search", "strategy", "interview", "remote", "market", "trend", "resume"],
-            articles: [
-              "How to write a compelling resume",
-              "Best resume templates and formats for 2024",
-              "Tips for creating ATS-friendly resumes",
-              "Common resume mistakes to avoid",
-              "How to use ChatGPT to build a resume",
-              "How to email your resume to HR",
-              "Sample emails for sending your resume",
-              "What to write in the email body when sending your resume",
-              "Best subject lines for resume emails",
-              "Follow-up emails after sending your resume"
+            "name": "Objectives",
+            "articles": [
+              "How to write a career objective for your resume",
+              "Examples of effective career objectives",
+              "Tips for aligning career objectives with job applications",
+              "Differences between career objectives and career summaries"
             ]
           },
           {
-            name: "Skill Development",
-            volume: 927400,
-            keywords: 26245,
-            nonSeedKeywords: ["demand", "up", "learn", "soft", "hard", "technical", "assessment", "gap", "transferable"],
-            articles: [
+            "name": "Exploration",
+            "articles": [
+              "Guides on exploring new career paths",
+              "Industry overviews and career prospects",
+              "Tools and resources for career exploration",
+              "Personal stories of career exploration and discovery"
+            ]
+          },
+          {
+            "name": "Development",
+            "articles": [
+              "Strategies for career advancement",
+              "Importance of continuous learning and development",
               "Developing soft and hard skills for career growth",
+              "Creating a professional development plan"
+            ]
+          },
+          {
+            "name": "Transition",
+            "articles": [
+              "Steps to successfully change careers",
+              "Overcoming challenges in career transitions",
+              "Stories of successful career changes",
+              "Tips for leveraging transferable skills"
+            ]
+          },
+          {
+            "name": "Opportunities",
+            "articles": [
+              "Lists of top job opportunities in different industries",
+              "Emerging career opportunities and trends",
+              "How to find and apply for job openings",
+              "Networking tips to discover career opportunities"
+            ]
+          },
+          {
+            "name": "Coaching",
+            "articles": [
+              "Benefits of working with a career coach",
+              "How to select the right career coach",
+              "Success stories from career coaching clients",
+              "Common career coaching techniques and strategies"
+            ]
+          },
+          {
+            "name": "Advice",
+            "articles": [
+              "Job search tips and strategies",
+              "Career advice for recent graduates",
+              "Dealing with workplace challenges",
+              "Balancing career and personal life"
+            ]
+          },
+          {
+            "name": "Planning",
+            "articles": [
+              "Creating a comprehensive career plan",
+              "Setting short-term and long-term career goals",
+              "Tools and resources for career planning",
+              "Revising and adapting career plans over time"
+            ]
+          },
+          {
+            "name": "Change",
+            "articles": [
+              "Planning a successful career change",
+              "Identifying reasons for a career change",
+              "Overcoming fear and uncertainty in career changes",
+              "Real-life examples of successful career changes"
+            ]
+          },
+          {
+            "name": "Training",
+            "articles": [
               "Top training programs for career advancement",
               "Benefits of professional certifications",
               "Online courses for skill development",
@@ -122,45 +182,35 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            name: "Professional Development",
-            volume: 411490,
-            keywords: 12948,
-            nonSeedKeywords: ["career", "Professional"],
-            articles: [
-              "Creating a professional development plan",
-              "Strategies for career advancement",
-              "Importance of continuous learning and development",
-              "Setting short-term and long-term career goals",
+            "name": "Success",
+            "articles": [
+              "Habits of successful professionals",
+              "Setting and achieving career milestones",
+              "Inspirational career success stories",
               "Building a successful career from the ground up"
             ]
           },
           {
-            name: "Professional Networking",
-            volume: 107470,
-            keywords: 3110,
-            nonSeedKeywords: ["event", "strategy", "connection", "relationship", "LinkedIn", "virtual", "informational", "alumni", "association"],
-            articles: [
+            "name": "Networking",
+            "articles": [
               "Effective networking strategies",
               "Building a professional network",
               "Leveraging social media for career networking",
-              "Networking events and opportunities",
-              "How to upload and update your resume on LinkedIn",
-              "Optimizing your LinkedIn profile for job applications"
+              "Networking events and opportunities"
             ]
           },
           {
-            name: "Personal Branding",
-            volume: 95690,
-            keywords: 2954,
-            articles: [
-              "Creating a strong personal brand on LinkedIn",
-              "Strategies for personal brand building",
-              "Success stories of personal branding",
-              "Leveraging social media for personal branding"
+            "name": "Counseling",
+            "articles": [
+              "What to expect from career counseling",
+              "Finding the right career counselor",
+              "Benefits of career counseling for career development",
+              "Common issues addressed in career counseling"
             ]
           }
         ]
-      },
+      }
+      ,
       {
         name: "Industry Insights",
         volume: 2975180,
