@@ -15,7 +15,7 @@ const ArticleList = ({ articles }) => (
   </div>
 );
 
-const TopicNode = ({ name, volume, impression, keywords, average_position, children, nonSeedKeywords, articles, blurb, level = 0 }) => {
+const TopicNode = ({ name, volume, impression, keywords, average_position, number_of_articles, children, nonSeedKeywords, articles, blurb, level = 0 }) => {
   const [isExpanded, setIsExpanded] = useState(level < 1);
   const [showKeywords, setShowKeywords] = useState(false);
   const [showArticles, setShowArticles] = useState(false);
@@ -46,17 +46,17 @@ const TopicNode = ({ name, volume, impression, keywords, average_position, child
         <span className={`font-bold mr-2 ${level === 0 ? 'text-xl' : ''} ${level === 1 ? 'text-lg' : ''}`}>{name}</span>
         {name === "Career" && (
           <span className="text-sm text-gray-600">
-            (avg monthly impression: {impression.toLocaleString()}, Keywords: {keywords.toLocaleString()}, Avg. Position: {average_position})
+            &nbsp;(avg monthly impression: {impression.toLocaleString()}, Keywords: {keywords.toLocaleString()}, Avg. Position: {average_position}, Articles: {number_of_articles.toLocaleString()})
           </span>
         )}
         {name !== "Career" && totalVolume !== undefined && (
           <span className="text-sm text-gray-600">
-            (Volume: {totalVolume.toLocaleString()}, Keywords: {totalKeywords.toLocaleString()})
+            &nbsp;(Volume: {totalVolume.toLocaleString()}, Keywords: {totalKeywords.toLocaleString()})
           </span>
         )}
         {impression !== undefined && name !== "Career" && (
           <span className="text-sm text-gray-600">
-            (avg monthly impression: {impression.toLocaleString()})
+            &nbsp;(avg monthly impression: {impression.toLocaleString()})
           </span>
         )}
         {nonSeedKeywords && (
@@ -108,6 +108,7 @@ const LinkedInPulseTopicsHierarchy = () => {
         impression: 1763410,
         keywords: 40954,
         average_position: 11.25,
+        number_of_articles: 21368,
         children: [
           {
             name: "Career Objectives",
@@ -421,12 +422,6 @@ const LinkedInPulseTopicsHierarchy = () => {
     ]
   };
 
-    // Sort the parent nodes by volume or impression
-    const sortParentNodes = (nodes) => {
-      return nodes.sort((a, b) => (b.volume || b.impression || 0) - (a.volume || a.impression || 0));
-    };
-
-    
   // Sort the children of the "Career" node alphabetically by name
   const sortChildrenAlphabetically = (node) => {
     if (node.children) {
