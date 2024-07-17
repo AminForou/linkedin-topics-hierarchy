@@ -15,7 +15,7 @@ const ArticleList = ({ articles }) => (
   </div>
 );
 
-const TopicNode = ({ name, volume, keywords, children, nonSeedKeywords, articles, level = 0 }) => {
+const TopicNode = ({ name, volume, impression, keywords, average_position, children, nonSeedKeywords, articles, level = 0 }) => {
   const [isExpanded, setIsExpanded] = useState(level < 1);
   const [showKeywords, setShowKeywords] = useState(false);
   const [showArticles, setShowArticles] = useState(false);
@@ -30,8 +30,8 @@ const TopicNode = ({ name, volume, keywords, children, nonSeedKeywords, articles
     setShowArticles(!showArticles);
   };
 
-  const totalVolume = children ? children.reduce((sum, child) => sum + child.volume, 0) : volume;
-  const totalKeywords = children ? children.reduce((sum, child) => sum + child.keywords, 0) : keywords;
+  const totalVolume = children && volume !== undefined ? children.reduce((sum, child) => sum + (child.volume || 0), 0) : volume;
+  const totalKeywords = children && keywords !== undefined ? children.reduce((sum, child) => sum + (child.keywords || 0), 0) : keywords;
 
   const sortedChildren = children ? [...children].sort((a, b) => b.volume - a.volume) : null;
 
@@ -44,9 +44,16 @@ const TopicNode = ({ name, volume, keywords, children, nonSeedKeywords, articles
       >
         {children && (isExpanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />)}
         <span className={`font-bold mr-2 ${level === 0 ? 'text-xl' : ''} ${level === 1 ? 'text-lg' : ''}`}>{name}</span>
-        <span className="text-sm text-gray-600">
-          (Volume: {totalVolume.toLocaleString()}, Keywords: {totalKeywords.toLocaleString()})
-        </span>
+        {totalVolume !== undefined && (
+          <span className="text-sm text-gray-600">
+            (Volume: {totalVolume.toLocaleString()}, Keywords: {totalKeywords.toLocaleString()})
+          </span>
+        )}
+        {impression !== undefined && average_position !== undefined && (
+          <span className="text-sm text-gray-600">
+            (Average Monthly Impression: {impression.toLocaleString()}, Avg. Position: {average_position})
+          </span>
+        )}
         {nonSeedKeywords && (
           <button
             className="ml-2 text-blue-500 hover:text-blue-700"
@@ -81,19 +88,20 @@ const TopicNode = ({ name, volume, keywords, children, nonSeedKeywords, articles
   );
 };
 
+
 const LinkedInPulseTopicsHierarchy = () => {
   const data = {
     name: "LinkedIn Pulse Core Topics",
     children: [
       {
-        "name": "Career",
-        "impression": 63482767,
-        "keywords": 40954,
-        "average_position": 11.25,
-        "children": [
+        name: "Career",
+        impression: 1763410,
+        keywords: 40954,
+        average_position: 11.25,
+        children: [
           {
-            "name": "Objectives",
-            "articles": [
+            name: "Objectives",
+            articles: [
               "How to write a career objective for your resume",
               "Examples of effective career objectives",
               "Tips for aligning career objectives with job applications",
@@ -101,8 +109,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Exploration",
-            "articles": [
+            name: "Exploration",
+            articles: [
               "Guides on exploring new career paths",
               "Industry overviews and career prospects",
               "Tools and resources for career exploration",
@@ -110,8 +118,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Development",
-            "articles": [
+            name: "Development",
+            articles: [
               "Strategies for career advancement",
               "Importance of continuous learning and development",
               "Developing soft and hard skills for career growth",
@@ -119,8 +127,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Transition",
-            "articles": [
+            name: "Transition",
+            articles: [
               "Steps to successfully change careers",
               "Overcoming challenges in career transitions",
               "Stories of successful career changes",
@@ -128,8 +136,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Opportunities",
-            "articles": [
+            name: "Opportunities",
+            articles: [
               "Lists of top job opportunities in different industries",
               "Emerging career opportunities and trends",
               "How to find and apply for job openings",
@@ -137,8 +145,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Coaching",
-            "articles": [
+            name: "Coaching",
+            articles: [
               "Benefits of working with a career coach",
               "How to select the right career coach",
               "Success stories from career coaching clients",
@@ -146,8 +154,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Advice",
-            "articles": [
+            name: "Advice",
+            articles: [
               "Job search tips and strategies",
               "Career advice for recent graduates",
               "Dealing with workplace challenges",
@@ -155,8 +163,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Planning",
-            "articles": [
+            name: "Planning",
+            articles: [
               "Creating a comprehensive career plan",
               "Setting short-term and long-term career goals",
               "Tools and resources for career planning",
@@ -164,8 +172,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Change",
-            "articles": [
+            name: "Change",
+            articles: [
               "Planning a successful career change",
               "Identifying reasons for a career change",
               "Overcoming fear and uncertainty in career changes",
@@ -173,8 +181,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Training",
-            "articles": [
+            name: "Training",
+            articles: [
               "Top training programs for career advancement",
               "Benefits of professional certifications",
               "Online courses for skill development",
@@ -182,8 +190,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Success",
-            "articles": [
+            name: "Success",
+            articles: [
               "Habits of successful professionals",
               "Setting and achieving career milestones",
               "Inspirational career success stories",
@@ -191,8 +199,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Networking",
-            "articles": [
+            name: "Networking",
+            articles: [
               "Effective networking strategies",
               "Building a professional network",
               "Leveraging social media for career networking",
@@ -200,8 +208,8 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           },
           {
-            "name": "Counseling",
-            "articles": [
+            name: "Counseling",
+            articles: [
               "What to expect from career counseling",
               "Finding the right career counselor",
               "Benefits of career counseling for career development",
@@ -209,8 +217,7 @@ const LinkedInPulseTopicsHierarchy = () => {
             ]
           }
         ]
-      }
-      ,
+      },
       {
         name: "Industry Insights",
         volume: 2975180,
@@ -390,6 +397,16 @@ const LinkedInPulseTopicsHierarchy = () => {
       }
     ]
   };
+
+  // Sort the children of the "Career" node alphabetically by name
+  const sortChildrenAlphabetically = (node) => {
+    if (node.children) {
+      node.children.sort((a, b) => a.name.localeCompare(b.name));
+      node.children.forEach(sortChildrenAlphabetically);
+    }
+  };
+
+  data.children.forEach(sortChildrenAlphabetically);
 
   return (
     <div className="p-4 font-sans">
