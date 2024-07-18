@@ -135,9 +135,9 @@ const LinkedInPulseTopicsHierarchy = () => {
             blurb: "Articles that focus on professional growth, skill development, and strategies for advancing one's career.",
             articles: [
               "Strategies for career advancement",
-              "Importance of continuous learning and development",
+              "Importance of continuous career learning and development",
               "Developing soft and hard skills for career growth",
-              "Creating a professional development plan"
+              "Creating a professional career development plan"
             ]
           },
           {
