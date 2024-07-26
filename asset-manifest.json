@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/linkedin-topics-hierarchy/static/css/main.c9bb5057.css",
-    "main.js": "/linkedin-topics-hierarchy/static/js/main.0d44ecd3.js",
+    "main.js": "/linkedin-topics-hierarchy/static/js/main.1d0471d5.js",
     "index.html": "/linkedin-topics-hierarchy/index.html",
     "main.c9bb5057.css.map": "/linkedin-topics-hierarchy/static/css/main.c9bb5057.css.map",
-    "main.0d44ecd3.js.map": "/linkedin-topics-hierarchy/static/js/main.0d44ecd3.js.map"
+    "main.1d0471d5.js.map": "/linkedin-topics-hierarchy/static/js/main.1d0471d5.js.map"
   },
   "entrypoints": [
     "static/css/main.c9bb5057.css",
-    "static/js/main.0d44ecd3.js"
+    "static/js/main.1d0471d5.js"
   ]
 }
